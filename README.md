@@ -5,15 +5,15 @@ CRUD Operations using Django REST Framework
 Using BeautifulSoup for IMDB Top Movies Scraping the results are used as datasets for performing Django REST Framework CRUD Operations
 (refer imdbScraping directory for complete code)
 
-from bs4 import BeautifulSoup
-import requests
-import re
-import pandas as pd
+from bs4 import BeautifulSoup <br />
+import requests <br />
+import re <br />
+import pandas as pd <br />
 
-url = "https://www.imdb.com/chart/top"  (for imdb website)
-response = requests.get(url)
-soup = BeautifulSoup(response.text, 'html.parser')
-print(soup.prettify())
+url = "https://www.imdb.com/chart/top"  (for imdb website) <br />
+response = requests.get(url) <br />
+soup = BeautifulSoup(response.text, 'html.parser') <br />
+print(soup.prettify()) <br />
 
 ## CRUD Operations 
 Create django project 
