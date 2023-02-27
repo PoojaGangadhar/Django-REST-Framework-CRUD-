@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Display Records</title>
+        <style>
+            table,
+            th,
+            td {
+                border: 1px solid black;
+                border-radius: 10px;
+            }
+        
+            th,
+            td {
+                background-color: #f3f3f3;
+            }
+        
+            th,
+            td {
+                border-style: outset;
+            }
+        </style>
+    </head>
+    <body>
+        
+        <table>
+            <tr>
+                <td> <h3>ID</h3> </td>
+                <td> <h3>movie_place</h3> </td>
+                <td><h3>movie_title</h3></td>
+                <td><h3>movie_rating</h3></td>
+                <td><h3>movie_year</h3></td>
+                <td><h3>movie_star_casts</h3></td>
+            </tr>
+            {% for movie in movies %}
+            <tr>
+                <td>{{movie.id}}</td>
+                <td>{{movie.place}}</td>
+                <td>{{movie.movie_title}}</td>
+                <td>{{movie.rating}}</td>
+                <td>{{movie.year}}</td>
+                <td>{{movie.star_cast}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+       
+        <br>
+        
+    </body>
+</html>
