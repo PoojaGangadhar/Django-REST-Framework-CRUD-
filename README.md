@@ -10,12 +10,12 @@ import requests
 import re
 import pandas as pd
 
-url = "https://www.imdb.com/chart/top"   (for imdb website)
+url = "https://www.imdb.com/chart/top"  (for imdb website)
 response = requests.get(url)
 soup = BeautifulSoup(response.text, 'html.parser')
 print(soup.prettify())
 
-##CRUD Operations 
+## CRUD Operations 
 Create django project 
     py django-admin startproject dataVisualization
     
@@ -95,7 +95,7 @@ def deleteData(request, pk):
     values.delete()
     return Response(status=status.HTTP_202_ACCEPTED)
 
-In urls.py create the urls for each operations
+# In urls.py create the urls for each operations
     urlpatterns = [
     path("admin/", admin.site.urls),
     path("topmovies/", views.retrievingData),   # to view all records in html page
@@ -106,10 +106,10 @@ In urls.py create the urls for each operations
     path("delete/<int:pk>/", views.deleteData, name='deleteData'), # delete data using rest_framework
     ]
 
-To run server use following command
+## To run server use following command
   py manage.py runserver
   
-To see the results use urls like shown below
+## To see the results use urls like shown below
   http://127.0.0.1:8000/topmovies/
   http://127.0.0.1:8000/apiview/
   
