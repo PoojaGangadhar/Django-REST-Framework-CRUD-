@@ -59,7 +59,7 @@ def insertData(request):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
 
-# Django Rest Framework – List View 
+## Django Rest Framework – List View 
 @api_view(['GET'])
 def viewData(request):
 
@@ -75,7 +75,7 @@ def viewData(request):
     else:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-# To Update View
+## To Update View
 @api_view(['POST'])
 def updateData(request, pk):
     value = ImdbTop250Movies.objects.get(pk=pk)
@@ -88,14 +88,14 @@ def updateData(request, pk):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
 
-# To delete the records using rest_framework
+## To delete the records using rest_framework
 @api_view(['DELETE'])
 def deleteData(request, pk):
     values = get_object_or_404(ImdbTop250Movies, pk=pk)       
     values.delete()
     return Response(status=status.HTTP_202_ACCEPTED)
 
-# In urls.py create the urls for each operations
+## In urls.py create the urls for each operations
     urlpatterns = [
     path("admin/", admin.site.urls),
     path("topmovies/", views.retrievingData),   # to view all records in html page
