@@ -16,11 +16,11 @@ soup = BeautifulSoup(response.text, 'html.parser') <br />
 print(soup.prettify()) <br />
 
 ## CRUD Operations 
-Create django project 
-    py django-admin startproject dataVisualization
+Create django project <br />
+    py django-admin startproject dataVisualization <br />
     
-Create project app
-    py django-admin startapp data
+Create project app <br />
+    py django-admin startapp data <br />
     
 Create the following model class in models.py
 
@@ -44,56 +44,55 @@ In django app create serializer class as below in serializers.py
 Refer views.py for GET, PUT, POST and DELETE operations
 # CRUD Operations Using Serializers
 # To create View 
-@api_view(['POST'])
-def insertData(request):
-    values = ImdbSerializers(data=request.data)
+@api_view(['POST']) <br />
+def insertData(request): <br />
+    values = ImdbSerializers(data=request.data) <br />
+ 
+    # to validate if data already exist <br />
+    if ImdbTop250Movies.objects.filter(**request.data).exists(): <br />
+        raise serializers.ValidationError("Data already exist") <br />
 
-    # to validate if data already exist
-    if ImdbTop250Movies.objects.filter(**request.data).exists():
-        raise serializers.ValidationError("Data already exist")
-
-    if values.is_valid():
-        values.save()
-        return Response(values.data)
-    else:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+    if values.is_valid(): <br />
+        values.save() <br /> 
+        return Response(values.data) <br />
+    else: <br />
+        return Response(status=status.HTTP_404_NOT_FOUND) <br />
 
 
 ## Django Rest Framework – List View 
-@api_view(['GET'])
-def viewData(request):
+@api_view(['GET']) <br />
+def viewData(request): <br />
+    if request.query_params: <br />
+        values = ImdbTop250Movies.objects.filter(**request.query_params.dict()) <br />
 
-    if request.query_params:
-        values = ImdbTop250Movies.objects.filter(**request.query_params.dict())
+    else: <br />
+        values = ImdbTop250Movies.objects.all() <br />
 
-    else:
-        values = ImdbTop250Movies.objects.all()
-
-    if values:
-        serializer = ImdbSerializers(values, many=True)
-        return Response(serializer.data)
-    else:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+    if values: <br />
+        serializer = ImdbSerializers(values, many=True) <br />
+        return Response(serializer.data) <br />
+    else: <br />
+        return Response(status=status.HTTP_404_NOT_FOUND) <br />
 
 ## To Update View
-@api_view(['POST'])
-def updateData(request, pk):
-    value = ImdbTop250Movies.objects.get(pk=pk)
-    data  = ImdbSerializers(instance=value, data=request.data)
+@api_view(['POST'])<br />
+def updateData(request, pk):<br />
+    value = ImdbTop250Movies.objects.get(pk=pk)<br />
+    data  = ImdbSerializers(instance=value, data=request.data)<br />
 
-    if data.is_valid():
-        data.save()
-        return Response(data.data)
-    else:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+    if data.is_valid():<br />
+        data.save()<br />
+        return Response(data.data)<br />
+    else:<br />
+        return Response(status=status.HTTP_404_NOT_FOUND)<br />
 
 
 ## To delete the records using rest_framework
-@api_view(['DELETE'])
-def deleteData(request, pk):
-    values = get_object_or_404(ImdbTop250Movies, pk=pk)       
-    values.delete()
-    return Response(status=status.HTTP_202_ACCEPTED)
+@api_view(['DELETE'])<br />
+def deleteData(request, pk):<br />
+    values = get_object_or_404(ImdbTop250Movies, pk=pk)    <br />   
+    values.delete()<br />
+    return Response(status=status.HTTP_202_ACCEPTED)<br />
 
 ## In urls.py create the urls for each operations
     urlpatterns = [
@@ -110,6 +109,6 @@ def deleteData(request, pk):
   py manage.py runserver
   
 ## To see the results use urls like shown below
-  http://127.0.0.1:8000/topmovies/
-  http://127.0.0.1:8000/apiview/
+  http://127.0.0.1:8000/topmovies/ <br />
+  http://127.0.0.1:8000/apiview/ <br />
   
